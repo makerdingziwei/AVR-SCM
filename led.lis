@@ -1,0 +1,119 @@
+                        .module led.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile led.c
+ 0000                   .dbfile D:\summer_camp\led\led.c
+ 0000                   .dbfunc e io_init _io_init fV
+                        .even
+ 0000           _io_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 4
+ 0000           ; #include "iom128v.h"
+ 0000           ; 
+ 0000           ; void io_init(void)
+ 0000           ; {
+ 0000                   .dbline 5
+ 0000           ;        DDRA = 0xff;
+ 0000 8FEF              ldi R24,255
+ 0002 8ABB              out 0x1a,R24
+ 0004                   .dbline -2
+ 0004           L1:
+ 0004                   .dbline 0 ; func end
+ 0004 0895              ret
+ 0006                   .dbend
+ 0006                   .dbfunc e delay _delay fV
+ 0006           ;              i -> R16,R17
+ 0006           ;              j -> R18,R19
+                        .even
+ 0006           _delay::
+ 0006                   .dbline -1
+ 0006                   .dbline 9
+ 0006           ; }
+ 0006           ; 
+ 0006           ; void delay(void)
+ 0006           ; {
+ 0006                   .dbline 11
+ 0006           ;        int i,j;
+ 0006           ;        for(i = 0;i < 1000;i++)
+ 0006 0027              clr R16
+ 0008 1127              clr R17
+ 000A           L3:
+ 000A                   .dbline 12
+ 000A           ;                 {
+ 000A                   .dbline 13
+ 000A           ;                  for(j = 0;j < 100;j++);
+ 000A 2227              clr R18
+ 000C 3327              clr R19
+ 000E           L7:
+ 000E                   .dbline 13
+ 000E           L8:
+ 000E                   .dbline 13
+ 000E 2F5F              subi R18,255  ; offset = 1
+ 0010 3F4F              sbci R19,255
+ 0012                   .dbline 13
+ 0012 2436              cpi R18,100
+ 0014 E0E0              ldi R30,0
+ 0016 3E07              cpc R19,R30
+ 0018 D4F3              brlt L7
+ 001A           X0:
+ 001A                   .dbline 14
+ 001A           ;                 }
+ 001A           L4:
+ 001A                   .dbline 11
+ 001A 0F5F              subi R16,255  ; offset = 1
+ 001C 1F4F              sbci R17,255
+ 001E                   .dbline 11
+ 001E 083E              cpi R16,232
+ 0020 E3E0              ldi R30,3
+ 0022 1E07              cpc R17,R30
+ 0024 94F3              brlt L3
+ 0026           X1:
+ 0026                   .dbline -2
+ 0026           L2:
+ 0026                   .dbline 0 ; func end
+ 0026 0895              ret
+ 0028                   .dbsym r i 16 I
+ 0028                   .dbsym r j 18 I
+ 0028                   .dbend
+ 0028                   .dbfunc e main _main fV
+                        .even
+ 0028           _main::
+ 0028                   .dbline -1
+ 0028                   .dbline 18
+ 0028           ; }
+ 0028           ; 
+ 0028           ; void main(void)
+ 0028           ; {
+ 0028                   .dbline 19
+ 0028           ;        io_init();
+ 0028 EBDF              xcall _io_init
+ 002A 06C0              xjmp L13
+ 002C           L12:
+ 002C                   .dbline 21
+ 002C           ;        while(1)
+ 002C           ;        {
+ 002C                   .dbline 22
+ 002C           ;                        PORTA = 0xfe;
+ 002C 8EEF              ldi R24,254
+ 002E 8BBB              out 0x1b,R24
+ 0030                   .dbline 23
+ 0030           ;                        delay();
+ 0030 EADF              xcall _delay
+ 0032                   .dbline 24
+ 0032           ;                        PORTA = 0xff;
+ 0032 8FEF              ldi R24,255
+ 0034 8BBB              out 0x1b,R24
+ 0036                   .dbline 25
+ 0036           ;                        delay();
+ 0036 E7DF              xcall _delay
+ 0038                   .dbline 26
+ 0038           ;        }
+ 0038           L13:
+ 0038                   .dbline 20
+ 0038 F9CF              xjmp L12
+ 003A           X2:
+ 003A                   .dbline -2
+ 003A           L11:
+ 003A                   .dbline 0 ; func end
+ 003A 0895              ret
+ 003C                   .dbend
+ 003C           ; }

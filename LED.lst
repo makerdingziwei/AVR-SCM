@@ -1,0 +1,76 @@
+Interrupt Vectors
+    00000 940C 0046 JMP	__start|__text_start
+
+Program Code (text area)
+FILE: <library>
+__start|__text_start:
+    00046 EFCF      LDI	R28,0xFF
+    00047 E1D0      LDI	R29,0x10
+    00048 BFCD      OUT	0x3D,R28
+    00049 BFDE      OUT	0x3E,R29
+    0004A 51CE      SUBI	R28,0x1E
+    0004B 40D0      SBCI	R29,0
+    0004C EA0A      LDI	R16,0xAA
+    0004D 8308      ST	Y,R16
+    0004E 2400      CLR	R0
+    0004F E0E0      LDI	R30,0
+    00050 E0F1      LDI	R31,1
+    00051 E011      LDI	R17,1
+    00052 30E0      CPI	R30,0
+    00053 07F1      CPC	R31,R17
+    00054 F011      BEQ	0x0057
+    00055 9201      ST	Z+,R0
+    00056 CFFB      RJMP	0x0052
+    00057 8300      ST	Z,R16
+    00058 E8EC      LDI	R30,0x8C
+    00059 E0F0      LDI	R31,0
+    0005A E0A0      LDI	R26,0
+    0005B E0B1      LDI	R27,1
+    0005C E010      LDI	R17,0
+    0005D E000      LDI	R16,0
+    0005E BF0B      OUT	0x3B,R16
+    0005F 38EC      CPI	R30,0x8C
+    00060 07F1      CPC	R31,R17
+    00061 F021      BEQ	0x0066
+    00062 95C8      LPM
+    00063 9631      ADIW	R30,1
+    00064 920D      ST	X+,R0
+    00065 CFF9      RJMP	0x005F
+    00066 940E 007D CALL	_main
+_exit:
+    00068 CFFF      RJMP	_exit
+_io_init:
+    00069 EF8F      LDI	R24,0xFF
+    0006A BB8A      OUT	0x1A,R24
+    0006B 9508      RET
+_delay:
+  i                    --> R16
+  j                    --> R18
+    0006C 2700      CLR	R16
+    0006D 2711      CLR	R17
+    0006E 2722      CLR	R18
+    0006F 2733      CLR	R19
+    00070 5F2F      SUBI	R18,0xFF
+    00071 4F3F      SBCI	R19,0xFF
+    00072 3624      CPI	R18,0x64
+    00073 E0E0      LDI	R30,0
+    00074 073E      CPC	R19,R30
+    00075 F3D4      BLT	0x0070
+    00076 5F0F      SUBI	R16,0xFF
+    00077 4F1F      SBCI	R17,0xFF
+    00078 3E08      CPI	R16,0xE8
+    00079 E0E3      LDI	R30,3
+    0007A 071E      CPC	R17,R30
+    0007B F394      BLT	0x006E
+    0007C 9508      RET
+_main:
+    0007D DFEB      RCALL	_io_init
+    0007E C006      RJMP	0x0085
+    0007F EF8E      LDI	R24,0xFE
+    00080 BB8B      OUT	0x1B,R24
+    00081 DFEA      RCALL	_delay
+    00082 EF8F      LDI	R24,0xFF
+    00083 BB8B      OUT	0x1B,R24
+    00084 DFE7      RCALL	_delay
+    00085 CFF9      RJMP	0x007F
+    00086 9508      RET

@@ -1,0 +1,56 @@
+XL
+H 1 areas 3 global symbols
+M led.c
+A text size 3C flags 0
+dbfile led.c
+dbfile D:\summer_camp\led\led.c
+dbfunc e io_init 0 fV
+dbline FFFFFFFF 0
+dbline 4 0
+dbline 5 0
+dbline FFFFFFFE 4
+dbline 0 4
+dbfunc e delay 6 fV
+dbsym r i 10 I
+dbsym r j 12 I
+dbline FFFFFFFF 6
+dbline 9 6
+dbline B 6
+dbline C A
+dbline D A
+dbline D E
+dbline D E
+dbline D 12
+dbline E 1A
+dbline B 1A
+dbline B 1E
+dbline FFFFFFFE 26
+dbline 0 26
+dbfunc e main 28 fV
+dbline FFFFFFFF 28
+dbline 12 28
+dbline 13 28
+dbline 15 2C
+dbline 16 2C
+dbline 17 30
+dbline 18 32
+dbline 19 36
+dbline 1A 38
+dbline 14 38
+dbline FFFFFFFE 3A
+dbline 0 3A
+S _main Def0028
+S _io_init Def0000
+S _delay Def0006
+T 00 00 8F EF 8A BB 08 95
+R 00 00 00 00
+T 06 00 00 27 11 27 22 27 33 27 2F 5F 3F 4F 24 36
+R 00 00 00 00
+T 14 00 E0 E0 3E 07 D4 F3 0F 5F 1F 4F 08 3E E3 E0
+R 00 00 00 00
+T 22 00 1E 07 94 F3 08 95
+R 00 00 00 00
+T 28 00 EB DF 06 C0 8E EF 8B BB EA DF 8F EF 8B BB
+R 00 00 00 00
+T 36 00 E7 DF F9 CF 08 95
+R 00 00 00 00
